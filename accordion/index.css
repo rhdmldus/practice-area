@@ -3,6 +3,6 @@ body{}
 .content_wrap{display:flex;justify-content:center;flex-direction:column;width:50%;margin:50px auto;}
 .btn_title {padding:10px;margin-bottom:5px;background-color:#2a9d8f;font-size:20px;line-height:30px;width:100%;color:#fff;}
 .btn_title:hover {background-color:#f4a261}
-.content_box{padding:0 10px;width:100%;height:0;background-color:#e9c46a;overflow:auto;transition:.3s;color:#333;}
+.content_box{padding:0 10px;width:100%;height:0;background-color:#eee;overflow:auto;transition:.3s;color:#333;}
 .btn_title{}
 .content_box.on{padding:10px;height:300px;}
