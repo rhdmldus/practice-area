@@ -5,13 +5,16 @@ btn.forEach(function (el) {
 });
 function toggleAccordion(el){
     let targetText = el.currentTarget.nextElementSibling.classList;
+    let target = el.currentTarget;
     if(targetText.contains('on')) {
         targetText.remove('on')
     }
     else {
         btn.forEach(function(el) {
             console.log(el)
-
+            content.forEach(function(el){
+                el.classList.remove('on')
+            })
         })
         targetText.add('on')
     }
