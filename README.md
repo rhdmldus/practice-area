@@ -1,2 +1,1 @@
-# practiceMakesPerfact
-# javascriptFocused
+javascriptFocused
