@@ -14,7 +14,6 @@ function toggleAccordion(el){
     }
     else {
         btn.forEach(function(el) {
-            console.log(el)
             el.classList.remove('on')
             content.forEach(function(el){
                 el.classList.remove('on')
