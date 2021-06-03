@@ -69,4 +69,4 @@ function toggleAccordion(el){
 //         targetAccIcon.classList.add('anime');
 //     }  
 // }
-// https://wsss.tistory.com/1291
+// https://wsss.tistory.com/
