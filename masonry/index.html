@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <title>Document</title>
+    <style>
+        .grid-item { width: 200px;}
+        .grid-item--width2 { width: 400px; }
+        img{width:100%;}
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="grid-item"><img src="img/img1.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img2.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img3.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img4.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img5.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img6.jpg" alt=""></div>
+        <div class="grid-item"><img src="img/img7.jpg" alt=""></div>
+    </div>
+
+    <script>
+        var elem = document.querySelector('.grid');
+        var msnry = new Masonry( elem, {
+        // options
+        itemSelector: '.grid-item',
+        });
+
+    // element argument can be a selector string
+    //   for an individual element
+    var msnry = new Masonry( '.grid', {
+    // options
+        gutter: 20,
+
+    });
+    msnry.on('layoutComplete', () => console.log('layoutComplete'))
+    </script>
+</body>
+</html>
