@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="/calculator/index.css">
 </head>
 <body>
-    <h1>계산기</h1>
     <div class="container">
-        <input type="text" value="0">
+        <input type="text" disabled>
         <div class="btn_wrap">
-            <button class="number" data-type="ac">c</button>
+            <button class="number" data-type="ac">AC</button>
             <button class="number" data-type="operator">÷</button>
             <button class="number" data-type="operator">*</button>
             <button class="number" data-type="del">←</button>
@@ -27,10 +26,11 @@
             <button class="number">1</button>
             <button class="number">2</button>
             <button class="number">3</button>
-            <button class="number enter" data-type="enter">=</button>
-            <button class="number zero">0</button>
             <button class="number">.</button>
+            <button class="number zero">0</button>
+            <button class="number enter" data-type="equals">=</button>
         </div>
+        <div class="history"></div>
     </div>
     <script src="/calculator/index.js"></script>
 </body>
