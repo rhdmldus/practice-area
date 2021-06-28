@@ -3,8 +3,10 @@
 var app = new Vue({
 el: '#app',
 data: {
+    onSale:true,
     selectedVariant:0,
     product: 'Socks',
+    brand: 'Vue Mastery',
     details: ['80% cotton', '20% polyester', 'Gender-neutral'],
     variants: [
     {
@@ -32,11 +34,20 @@ methods: {
     }
 },
 computed:{
+    title(){
+        return this.brand + ' ' + this.product
+    },
     image(){
     return this.variants[this.selectedVariant].variantImage
     },
     inStock(){
         return this.variants[this.selectedVariant].variantQuantity
+    },
+    sale(){
+        if(this.onSale) {
+            return this.brand + ' ' + this.product + 'are on Sale!'
+        }
+            return this.brand + ' ' + this.product + 'are not on Sale!'
     }
 
 }
