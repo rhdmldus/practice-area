@@ -1,4 +1,78 @@
 //When inStock is false, bind a class to the “Out of Stock” p tag that adds  text-decoration: line-through to that element.
+Vue.component('product-review', {
+    template: `
+        <form class="review-form" @submit.prevent="onSubmit">
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
+            <p>
+                <label for="name">Name:</label>
+                <input id="name" v-model="name" placeholder="name">
+            </p>
+            <p>
+                <label for="review">Review:</label>
+                <textarea id="review" v-model="review" placeholder="review"></textarea>
+            </p>
+            <p>
+                <label for="rating">Rating:</label>
+                <select id="rating" v-model.number="rating">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+            </p>
+            <p>Would you recommend this product?</p>
+                <label>
+                    yes
+                    <input type="radio" value="yes" v-model="recommend"/>
+                </label>
+                <label>
+                    no
+                    <input type="radio" value="no" v-model="recommend"/>
+                </label>
+            <p>
+                <input type="submit" value="submit">
+            </p>
+        </form>
+    `,
+    data(){
+        return {
+            name:null,
+            review:null,
+            rating:null,
+            recommend:null,
+            errors: []
+        }
+    },
+    methods: {
+        onSubmit() {
+            if(this.name && this.review && this.rating && this.recommend) {
+                let productReview = {
+                    name: this.name,
+                    review: this.review,
+                    rating: this.rating,
+                    recommend: this.recommend
+                }
+                this.$emit('review-submitted', productReview)
+                this.name = null
+                this.review = null
+                this.rating = null
+                this.recommend = null
+            }
+            else {
+                if(!this.name) this.errors.push('Name required.')
+                if(!this.review) this.errors.push('Review required.')
+                if(!this.rating) this.errors.push('Rating required.')
+                if(!this.recommend) this.errors.push('Recommendation required.')
+            }
+        }
+    }
+})
 Vue.component('productDetail', {
     props: {
         details:{
@@ -50,8 +124,21 @@ Vue.component('product', {
                     >
                 Remove Items
                 </button>
-            </div> 
-        </div>
+                </div> 
+                <div>
+                    <h2>Reviews</h2>
+                    <p v-if="!reviews.length">There are no reviews yet.</p>
+                    <ul>
+                        <li v-for="review in reviews">
+                            <p>name: {{ review.name }}</p>
+                            <p>review: {{ review.review }}</p>
+                            <p>rating: {{ review.rating }}</p>
+                            <p>recommendation: {{ review.recommend }}</p>
+                        </li>
+                    </ul>
+                </div>
+                <product-review @review-submitted="addReview"></product-review>
+            </div>
         `,
         data() {
             return(
@@ -75,6 +162,7 @@ Vue.component('product', {
                         variantQuantity: 0,
                     }
                     ],
+                    reviews: []
                 }
             )
         },
@@ -88,6 +176,9 @@ Vue.component('product', {
             updateProduct(index) {
             this.selectedVariant = index
             console.log(index)
+            },
+            addReview(productReview){
+                this.reviews.push(productReview)
             }
         },
         computed:{
