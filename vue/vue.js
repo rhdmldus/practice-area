@@ -1,4 +1,39 @@
-//When inStock is false, bind a class to the “Out of Stock” p tag that adds  text-decoration: line-through to that element.
+var eventBus = new Vue()
+Vue.component('product-info-tab',{
+    props: {
+        details: {
+            type: Array,
+            required: true
+        },  
+        shipping: {
+            required: true
+        }  
+    },
+    template:`
+            <div>
+                <span class="tab"
+                    :class="{ activeTab: selectedTab === tab }"
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    @click="selectedTab = tab"
+                >{{ tab }}</span>
+                <div  v-show="selectedTab === 'Shipping'">
+                    <p>shipping: {{ shipping }}</p>
+                </div>
+                <div  v-show="selectedTab === 'Details'">
+                    <ul>
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        data() {
+            return {
+                tabs: ['Details', 'Shipping'],
+                selectedTab: 'Details'
+            }
+        }
+})
 Vue.component('product-tabs', {
     props: {
         reviews: {
@@ -25,8 +60,7 @@ Vue.component('product-tabs', {
                         </li>
                     </ul>
                 </div>
-                <product-review v-show="selectedTab === 'Make a Review'"
-                                @review-submitted="addReview"></product-review>
+                <product-review v-show="selectedTab === 'Make a Review'"></product-review>
             </div>
             `,
         data(){
@@ -94,7 +128,7 @@ Vue.component('product-review', {
                     rating: this.rating,
                     recommend: this.recommend
                 }
-                this.$emit('review-submitted', productReview)
+                eventBus.$emit('review-submitted', productReview)
                 this.name = null
                 this.review = null
                 this.rating = null
@@ -132,39 +166,41 @@ Vue.component('product', {
             <div class="product-image">
                 <img :src="image" />
             </div>
-            <div class="product-info">
+            <div class="product-info">             
                 <h1>{{ title }}</h1>
                 <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
-                <p>shipping: {{ shipping }}</p>
                 <p>{{ sale }}</p>
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
+                
+                <product-info-tab 
+                    :shipping="shipping"
+                    :details="details">
+                </product-info-tab>
+
                 <div class="color-box"
-                        v-for="(variant, index) in variants" 
-                        :key="variant.variantId"
-                        :style="{ backgroundColor: variant.variantColor }"
-                        @mouseover="updateProduct(index)"
-                        >
-                </div> 
-                <button v-on:click="addToCart" 
-                    :disabled="!inStock"
-                    :class="{ disabledButton: !inStock }"
+                    v-for="(variant, index) in variants" 
+                    :key="variant.variantId"
+                    :style="{ backgroundColor: variant.variantColor }"
+                    @mouseover="updateProduct(index)"
                     >
-                Add to cart
-                </button>
-                <button v-on:click="removeItems" 
-                    :disabled="!inStock"
-                    :class="{ disabledButton: !inStock }"
-                    >
-                Remove Items
-                </button>
             </div> 
+            <button v-on:click="addToCart" 
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock }"
+                >
+            Add to cart
+            </button>
+            <button v-on:click="removeItems" 
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock }"
+                >
+            Remove Items
+            </button>
                 <div>
                     <product-tabs :reviews="reviews"></product-tabs>
                 </div>
             </div>
+        </div> 
         `,
         data() {
             return(
@@ -202,9 +238,6 @@ Vue.component('product', {
             updateProduct(index) {
             this.selectedVariant = index
             console.log(index)
-            },
-            addReview(productReview){
-                this.reviews.push(productReview)
             }
         },
         computed:{
@@ -229,7 +262,11 @@ Vue.component('product', {
                 }
                 return 2.99
             }
-        
+        },
+        mounted() {
+            eventBus.$on('review-submitted', productReview => {
+                this.reviews.push(productReview)
+            })
         }
 })
 var app = new Vue({
