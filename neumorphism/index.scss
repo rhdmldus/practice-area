@@ -1,9 +1,12 @@
 *{padding:0;margin:0;}
-$white: #f0f0f0;
-$white-1:#f5f6f7;
+$white: #fff;
+$white-1:#dce0e4;
+$white-2:#a1a8b3;
 $color-shadow :#ccc;
 body{
+    position:relative;
     background:$white-1;
+    
 }
 .box {
     width:100%;
@@ -22,7 +25,7 @@ body{
     width: 200px;
     height: 300px;
     border-radius:20px;
-    background:$white;
+    background:$white-1;
     box-shadow: 0 0 0 $color-shadow,
                     0 0 0 $white,
                     10px 10px 10px $color-shadow inset,
@@ -85,14 +88,14 @@ body{
 .circle{
     width:75px;
     height:75px;
-    border:30px solid #fff;
+    border:30px solid $white;
     border-radius:50%;
     position:relative;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    box-shadow: -4px -2px 4px 0px #fff,
-                4px 2px 6px 0px #dfe4ea;
+    box-shadow: -4px -2px 4px 0px $white,
+                4px 2px 6px 0px $white-2;
     &::after{
         content:"";
         position:absolute;
@@ -101,7 +104,7 @@ body{
         border-radius:50%;
         width:100%;
         height:100%;
-        box-shadow:2px 2px 2px 0px #dfe4ea inset, -2px -2px 2px 0px #fff inset;
+        box-shadow:2px 2px 2px 0px $white-2 inset, -2px -2px 2px 0px $white inset;
     }
     &.html {
         transition: stroke-dashoffset 3s;
@@ -174,4 +177,18 @@ svg circle{
     top:20px;left:50%;
     transform: translateX(-50%);
     text-transform:uppercase;
+}
+// 다크모드
+.dark{
+
+}
+@keyframes cardAni2 {
+    100%{
+        width: 200px;
+        height: 300px;
+        background: #282a2b;
+        -webkit-box-shadow: 40px 40px 40px #ccc, 0 0 0 #fff, 0 0 0 #ccc inset, 2px 2px 2px #fff inset;
+        box-shadow: 40px 40px 40px #424242, 0 0 0 #969696, 0 0 0 #ccc inset, 2px 2px 2px #6f6f6f inset;
+        color: #efefef;
+    }
 }
