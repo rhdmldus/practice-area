@@ -1,110 +1,69 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
-  --pink: #f58f7c;
-  --gray: #4f4f51;
-  --dark-gray: #2c2b30;
-  --main-font: "Montserrat", sans-serif;
-}
-* {
-  margin: 0;
-  padding: 0;
+  --green: #006450;
+  --red: #ff4a50;
+  --yellow: #f2d832;
 }
 body {
-  width: 100%;
-  font-family: var(--main-font);
-}
-ul {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-  color: #333;
-  padding: 0 40px;
-  text-transform: capitalize;
-  display: inline-block;
-  height: 5rem;
-  line-height: 5rem;
-}
-a:hover {
   background: #fff;
+  color: #333;
 }
-.header {
-  width: 100%;
-  height: 5rem;
-  background: var(--pink);
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.header ul {
-  width: 100%;
-  height: 100%;
+.circle_wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.section {
   width: 100%;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5rem;
-  box-sizing: border-box;
-}
-.switch {
-  width: 100px;
-  height: 50px;
-  position: absolute;
-  top: 30vh;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 35px;
-  box-shadow: 0 2px 4px 0 rgba(151, 145, 151, 0.1);
 }
 .circle {
-  width: 30px;
-  height: 30px;
-  background: #fff;
+  cursor: pointer;
+  margin: 1rem;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+}
+.pie {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  left: 1em;
-  transform: translateY(-50%);
-  transition: transform 0.5s;
-  cursor: pointer;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
 }
-.text {
-  text-align: center;
-  font-size: 5vw;
-  text-transform: capitalize;
+circle {
+  fill: none;
+  stroke: rgb(243, 243, 243);
+  stroke-width: 14;
 }
-.text p {
-  font-size: 1.5rem;
-  text-transform: none;
+circle:nth-child(2) {
+  stroke: #3d3ded;
+  stroke-dashoffset: 316px;
+  stroke-dasharray: 333px;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 2s;
 }
-.text.dark {
-  display: none;
+.circle_1 circle:nth-child(2) {
+  stroke: var(--green);
 }
-/* 형제선택자를 이용해서 본문을 감싸고있는 div.wrap에 접근*/
-#switchInput:checked ~ .wrap .section .text.dark {
-  display: block;
+.circle_2 circle:nth-child(2) {
+  stroke: var(--red);
 }
-#switchInput:checked ~ .wrap .section .text.normal {
-  display: none;
+.circle_3 circle:nth-child(2) {
+  stroke: var(--yellow);
 }
-#switchInput:checked ~ .wrap .section {
-  background: #2c2b30;
-  color: var(--pink);
+.circle_1.on circle:nth-child(2) {
+  stroke-dashoffset: calc(332px - 332px * 10 / 100);
 }
-#switchInput:checked ~ .wrap .header {
-  background: var(--gray);
+.circle_2.on circle:nth-child(2) {
+  stroke-dashoffset: calc(332px - 332px * 50 / 100);
 }
-#switchInput:checked ~ .wrap a {
-  color: var(--pink);
+.circle_3.on circle:nth-child(2) {
+  stroke-dashoffset: calc(332px - 332px * 90 / 100);
 }
-/* 인접선택자를 이용해서 label.swich에 접근 */
-#switchInput:checked + .switch .circle {
-  transform: translate(40px, -50%);
+.wrap_txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -8,24 +8,33 @@
     <script defer src="index.js"></script>
   </head>
   <body>
-    <input type="checkbox" id="switchInput" />
-    <label class="switch" for="switchInput"><div class="circle"></div></label>
-    <div class="wrap">
-      <div class="header">
-        <ul>
-          <li><a href="#">menu1</a></li>
-          <li><a href="#">menu2</a></li>
-          <li><a href="#">menu3</a></li>
-        </ul>
+    <div class="circle_wrap">
+      <div class="circle circle_1">
+        <div class="pie">
+          <svg>
+            <circle cx="60" cy="60" r="53"></circle>
+            <circle cx="60" cy="60" r="53"></circle>
+          </svg>
+        </div>
+        <div class="wrap_txt counter" data-num="90">10%</div>
       </div>
-      <div class="section">
-        <div class="text normal">
-          <h3>click it turn off the light</h3>
+      <div class="circle circle_2">
+        <div class="pie">
+          <svg>
+            <circle cx="60" cy="60" r="53"></circle>
+            <circle cx="60" cy="60" r="53"></circle>
+          </svg>
         </div>
-        <div class="text dark">
-          <h3>dark mode on</h3>
-          <p>Click it again to turn it back on</p>
+        <div class="wrap_txt counter" data-num="90">50%</div>
+      </div>
+      <div class="circle circle_3">
+        <div class="pie">
+          <svg>
+            <circle cx="60" cy="60" r="53"></circle>
+            <circle cx="60" cy="60" r="53"></circle>
+          </svg>
         </div>
+        <div class="wrap_txt counter" data-num="90">90%</div>
       </div>
     </div>
   </body>
